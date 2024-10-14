@@ -16,6 +16,8 @@ function App() {
     }
   }, []);
 
+alert(window.Telegram?.WebApp?.initData)
+
   return (
     <div className="telegram-user-container">
       <div className="user-info-card">
