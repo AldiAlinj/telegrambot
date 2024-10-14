@@ -1,26 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import './App.css'; // Importing the CSS file for styling
 
 function App() {
-console.log(window.Telegram.WebApp.initDataUnsafe.user);
+  const [username, setUsername] = useState('');
 
+  useEffect(() => {
+    // Check if the Telegram WebApp API is available
+    if (window.Telegram?.WebApp?.initDataUnsafe) {
+      const user = window.Telegram.WebApp.initDataUnsafe.user;
+
+      if (user) {
+        // Set the username or fallback to first name
+        setUsername(user.username || user.first_name || 'User');
+      }
+    }
+  }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {window.Telegram.WebApp.initDataUnsafe.user}
-        </a>
-      </header>
+    <div className="telegram-user-container">
+      <div className="user-info-card">
+        <h1 className="welcome-text">Welcome, {username}!</h1>
+      </div>
     </div>
   );
 }
